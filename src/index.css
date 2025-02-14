@@ -1,0 +1,101 @@
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+  color-scheme: light dark;
+  color: #000;
+  background-image: url('./assets/OL5RO90.jpg');
+  background-repeat: no-repeat;
+  background-size: auto;
+
+  /* background-position: center center; */
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  height: 75vh;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+img {
+  width: 250px;
+  height: 250px;
+}
+
+h1 {
+  text-align: center;
+}
+
+.btn {
+  cursor: pointer;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  width: 100%;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out; /* Agrega una transición suave */
+}
+
+.btn-yes {
+  background-color: rgb(13, 185, 13);
+}
+
+.btn-yes:hover {
+  background-color: rgb(13, 150, 13);
+}
+
+.btn-no {
+  background-color: rgb(255, 75, 75);
+}
+
+.btn-no:hover {
+  background-color: rgb(255, 0, 0);
+}
+
+.section-forgive {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+
+  & h1 {
+    text-align: center;
+  }
+}
+
+@media (max-width: 468px) {
+  .container-btns {
+    flex-direction: column;
+    gap: 10px; /* Reduce el espacio entre los botones en pantallas pequeñas */
+    width: 100%;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
+
+div.hidden-buttons {
+  display: none;
+}
+
+.container-btns {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.section-img {
+  margin: 0 auto;
+}
+
+.btn-no-container {
+  align-self: center;
+  width: 100%;
+  background-color: ;
+}
