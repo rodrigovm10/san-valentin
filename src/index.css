@@ -1,63 +1,168 @@
+/* ===== Reset & Base ===== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-
-  color-scheme: light dark;
-  color: #000;
-  background-image: url('./assets/OL5RO90.jpg');
-  background-repeat: no-repeat;
-  background-size: auto;
-
-  /* background-position: center center; */
+  color-scheme: light;
 }
 
 body {
+  min-height: 100vh;
   display: flex;
   justify-content: center;
-  height: 75vh;
   align-items: center;
+  background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 30%, #f48fb1 60%, #ec407a 100%);
+  overflow: hidden;
+  position: relative;
 }
+
+/* ===== Floating Hearts Background ===== */
+
+body::before,
+body::after {
+  content: '💕 💖 💗 💓 💞 💘 💝 ❤️ 💕 💖 💗 💓 💞 💘 💝 ❤️ 💕 💖 💗 💓';
+  position: fixed;
+  font-size: 1.6rem;
+  white-space: nowrap;
+  opacity: 0.12;
+  pointer-events: none;
+  z-index: 0;
+  word-spacing: 30px;
+  letter-spacing: 20px;
+}
+
+body::before {
+  top: -20px;
+  left: -50px;
+  animation: float-bg-1 25s linear infinite;
+}
+
+body::after {
+  bottom: -20px;
+  right: -50px;
+  animation: float-bg-2 30s linear infinite;
+}
+
+@keyframes float-bg-1 {
+  0% {
+    transform: translateX(-10%) translateY(0) rotate(-3deg);
+  }
+  50% {
+    transform: translateX(5%) translateY(20px) rotate(2deg);
+  }
+  100% {
+    transform: translateX(-10%) translateY(0) rotate(-3deg);
+  }
+}
+
+@keyframes float-bg-2 {
+  0% {
+    transform: translateX(10%) translateY(0) rotate(3deg);
+  }
+  50% {
+    transform: translateX(-5%) translateY(-20px) rotate(-2deg);
+  }
+  100% {
+    transform: translateX(10%) translateY(0) rotate(3deg);
+  }
+}
+
+/* ===== Glass Card Container ===== */
 
 .container {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  align-items: center;
+  gap: 24px;
+  padding: 40px 48px 36px;
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow:
+    0 8px 40px rgba(236, 64, 122, 0.18),
+    0 2px 12px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  max-width: 460px;
+  width: 90vw;
 }
 
-img {
-  width: 250px;
-  height: 250px;
-}
+/* ===== Title ===== */
 
 h1 {
   text-align: center;
+  font-size: 1.45rem;
+  line-height: 1.4;
 }
 
-.btn {
-  cursor: pointer;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  width: 100%;
-  transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out; /* Agrega una transición suave */
+.title {
+  font-family: 'Dancing Script', cursive;
+  font-weight: 700;
+  font-size: 1.8rem;
+  background: linear-gradient(135deg, #d81b60, #e91e63, #f06292, #d81b60);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer-text 4s ease-in-out infinite;
+  padding: 0 8px;
 }
 
-.btn-yes {
-  background-color: rgb(13, 185, 13);
+.title-forgiven {
+  font-family: 'Dancing Script', cursive;
+  font-weight: 700;
+  font-size: 1.55rem;
+  background: linear-gradient(135deg, #e91e63, #ff5252, #ff4081, #e91e63);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer-text 3s ease-in-out infinite;
+  padding: 0 8px;
 }
 
-.btn-yes:hover {
-  background-color: rgb(13, 150, 13);
+@keyframes shimmer-text {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
-.btn-no {
-  background-color: rgb(255, 75, 75);
+/* ===== Image ===== */
+
+.section-img {
+  margin: 0 auto;
+  position: relative;
 }
 
-.btn-no:hover {
-  background-color: rgb(255, 0, 0);
+.section-img img {
+  width: 220px;
+  height: 220px;
+  object-fit: contain;
+  border-radius: 20px;
+  filter: drop-shadow(0 6px 20px rgba(236, 64, 122, 0.2));
+  transition: transform 0.4s ease;
 }
+
+.section-img img:hover {
+  transform: scale(1.04) rotate(1deg);
+}
+
+/* ===== Buttons Section ===== */
 
 .section-forgive {
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -68,10 +173,264 @@ h1 {
   }
 }
 
-@media (max-width: 468px) {
+.container-btns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+}
+
+div.hidden-buttons {
+  display: none;
+}
+
+/* ===== Buttons ===== */
+
+.btn {
+  cursor: pointer;
+  border: none;
+  border-radius: 50px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition:
+    transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.35s ease,
+    filter 0.3s ease;
+}
+
+.btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.btn:active {
+  transform: scale(0.94) !important;
+}
+
+/* -- "Si" button -- */
+.btn-yes {
+  background: linear-gradient(135deg, #ff6b9d 0%, #e8447a 50%, #d63384 100%);
+  color: #fff;
+  box-shadow:
+    0 4px 18px rgba(214, 51, 132, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  text-shadow: 0 1px 3px rgba(150, 0, 60, 0.25);
+  min-width: 120px;
+}
+
+.btn-yes::after {
+  background: linear-gradient(135deg, #ff85b1 0%, #ff6b9d 50%, #e8447a 100%);
+}
+
+.btn-yes:hover {
+  transform: scale(1.08) translateY(-3px);
+  box-shadow:
+    0 10px 30px rgba(214, 51, 132, 0.5),
+    0 0 24px rgba(255, 107, 157, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  filter: brightness(1.08);
+}
+
+.btn-yes:hover::after {
+  opacity: 1;
+}
+
+.btn-yes:hover .btn-heart {
+  animation: heart-float 0.5s ease-in-out infinite alternate;
+}
+
+.btn-heart {
+  font-size: 0.85em;
+  display: inline-block;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s ease;
+}
+
+.btn-heart-right {
+  animation-delay: 0.12s !important;
+}
+
+.btn-label {
+  position: relative;
+  z-index: 1;
+}
+
+/* -- "No" button -- */
+.btn-no {
+  background: linear-gradient(135deg, #bdbdbd 0%, #9e9e9e 50%, #757575 100%);
+  color: #fff;
+  padding: 14px 24px;
+  box-shadow:
+    0 3px 12px rgba(117, 117, 117, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+  min-width: 100px;
+}
+
+.btn-no::after {
+  background: linear-gradient(135deg, #d0d0d0 0%, #bdbdbd 50%, #9e9e9e 100%);
+}
+
+.btn-no:hover {
+  transform: scale(1.03) translateY(-1px);
+  box-shadow:
+    0 6px 18px rgba(117, 117, 117, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  filter: brightness(1.04);
+}
+
+.btn-no:hover::after {
+  opacity: 1;
+}
+
+.btn-no:hover .btn-icon {
+  animation: shake 0.4s ease-in-out;
+}
+
+.btn-icon {
+  font-size: 0.95em;
+  display: inline-block;
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== Celebration (forgiven state) ===== */
+
+.container.is-forgiven {
+  animation: celebrate-pop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.celebration-hearts {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  border-radius: 28px;
+}
+
+.falling-heart {
+  position: absolute;
+  top: -30px;
+  font-size: 1.3rem;
+  animation: fall-heart 3s ease-in infinite;
+  opacity: 0.7;
+}
+
+.falling-heart:nth-child(1) {
+  left: 10%;
+  animation-delay: 0s;
+  animation-duration: 3.2s;
+}
+.falling-heart:nth-child(2) {
+  left: 25%;
+  animation-delay: 0.5s;
+  animation-duration: 2.8s;
+}
+.falling-heart:nth-child(3) {
+  left: 40%;
+  animation-delay: 1s;
+  animation-duration: 3.5s;
+}
+.falling-heart:nth-child(4) {
+  left: 55%;
+  animation-delay: 0.3s;
+  animation-duration: 2.9s;
+}
+.falling-heart:nth-child(5) {
+  left: 70%;
+  animation-delay: 0.8s;
+  animation-duration: 3.1s;
+}
+.falling-heart:nth-child(6) {
+  left: 85%;
+  animation-delay: 1.2s;
+  animation-duration: 3.4s;
+}
+.falling-heart:nth-child(7) {
+  left: 5%;
+  animation-delay: 1.5s;
+  animation-duration: 2.7s;
+}
+.falling-heart:nth-child(8) {
+  left: 50%;
+  animation-delay: 0.7s;
+  animation-duration: 3.3s;
+}
+.falling-heart:nth-child(9) {
+  left: 35%;
+  animation-delay: 1.8s;
+  animation-duration: 2.6s;
+}
+.falling-heart:nth-child(10) {
+  left: 80%;
+  animation-delay: 0.2s;
+  animation-duration: 3.6s;
+}
+
+@keyframes fall-heart {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(500px) rotate(360deg) scale(0.3);
+    opacity: 0;
+  }
+}
+
+@keyframes celebrate-pop {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.6;
+  }
+  60% {
+    transform: scale(1.03);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ===== Responsive ===== */
+
+@media (max-width: 500px) {
+  .container {
+    padding: 28px 20px 24px;
+    gap: 18px;
+    border-radius: 22px;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .title-forgiven {
+    font-size: 1.3rem;
+  }
+
+  .section-img img {
+    width: 180px;
+    height: 180px;
+  }
+
   .container-btns {
     flex-direction: column;
-    gap: 10px; /* Reduce el espacio entre los botones en pantallas pequeñas */
+    gap: 10px;
     width: 100%;
   }
 
@@ -80,22 +439,192 @@ h1 {
   }
 }
 
-div.hidden-buttons {
-  display: none;
-}
+/* ===== Valentine's Day Loader ===== */
 
-.container-btns {
+.loader-overlay {
+  position: fixed;
+  inset: 0;
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  gap: 20px;
+  background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 40%, #f48fb1 100%);
+  z-index: 9999;
+  transition: opacity 0.8s ease-out;
 }
 
-.section-img {
-  margin: 0 auto;
+.loader-fade-out {
+  opacity: 0;
+  pointer-events: none;
 }
 
-.btn-no-container {
-  align-self: center;
-  width: 100%;
-  background-color: ;
+.loader-hearts {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  animation: spin-slow 4s linear infinite;
+}
+
+.loader-heart {
+  position: absolute;
+  font-size: 1.8rem;
+  animation: pulse-heart 1.2s ease-in-out infinite alternate;
+}
+
+.heart-1 {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  animation-delay: 0s;
+}
+.heart-2 {
+  top: 30%;
+  right: 0;
+  animation-delay: 0.2s;
+}
+.heart-3 {
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  animation-delay: 0.4s;
+}
+.heart-4 {
+  top: 30%;
+  left: 0;
+  animation-delay: 0.6s;
+}
+.heart-5 {
+  bottom: 25%;
+  right: 5%;
+  animation-delay: 0.8s;
+}
+
+.loader-big-heart {
+  font-size: 4rem;
+  animation: beat 1s ease-in-out infinite;
+  filter: drop-shadow(0 0 16px rgba(255, 105, 135, 0.6));
+}
+
+.loader-text {
+  margin-top: 28px;
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #ad1457;
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+
+.loader-dots {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #e8567d;
+  animation: bounce-dot 1.4s ease-in-out infinite;
+}
+
+.dot-1 {
+  animation-delay: 0s;
+}
+.dot-2 {
+  animation-delay: 0.2s;
+}
+.dot-3 {
+  animation-delay: 0.4s;
+}
+
+/* App entrance */
+.app-fade-in {
+  animation: fade-in 0.7s ease-out;
+}
+
+/* ===== Keyframes ===== */
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse-heart {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1.3);
+    opacity: 1;
+  }
+}
+
+@keyframes beat {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  15% {
+    transform: scale(1.25);
+  }
+  30% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(1.15);
+  }
+  60% {
+    transform: scale(1);
+  }
+}
+
+@keyframes bounce-dot {
+  0%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heart-float {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    transform: translateY(-4px) scale(1.18);
+  }
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-3px) rotate(-5deg);
+  }
+  75% {
+    transform: translateX(3px) rotate(5deg);
+  }
 }
